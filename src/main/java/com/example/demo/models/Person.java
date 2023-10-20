@@ -1,5 +1,7 @@
 package com.example.demo.models;
 
+import com.example.demo.token.Token;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -41,6 +43,9 @@ public class Person {
 
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Chat> chats = new ArrayList<Chat>();
+
+    @OneToMany(mappedBy = "person")
+    private List<Token> tokens;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinTable(name = "Person_Role", joinColumns = @JoinColumn(name = "person_id", referencedColumnName = "id"),
